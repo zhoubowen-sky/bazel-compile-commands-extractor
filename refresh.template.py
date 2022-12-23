@@ -863,11 +863,11 @@ def _get_commands(target: str, flags: str):
         # One bummer, not described in the docs, is that aquery filters over *all* actions for a given target, rather than just those that would be run by a build to produce a given output. This mostly isn't a problem, but can sometimes surface extra, unnecessary, misconfigured actions. Chris has emailed the authors to discuss and filed an issue so anyone reading this could track it: https://github.com/bazelbuild/bazel/issues/14156.
         f"mnemonic('(Objc|Cpp)Compile',deps({target}))",
         # We switched to jsonproto instead of proto because of https://github.com/bazelbuild/bazel/issues/13404. We could change back when fixed--reverting most of the commit that added this line and tweaking the build file to depend on the target in that issue. That said, it's kinda nice to be free of the dependency, unless (OPTIMNOTE) jsonproto becomes a performance bottleneck compated to binary protos.
-        '--output=jsonproto',
+        '--output=proto',
         # We'll disable artifact output for efficiency, since it's large and we don't use them. Small win timewise, but dramatically less json output from aquery.
         '--include_artifacts=false',
         # Shush logging. Just for readability.
-        '--ui_event_filters=-info',
+        # '--ui_event_filters=-info',
         '--noshow_progress',
         # Disable param files, which would obscure compile actions
         # Mostly, people enable param files on Windows to avoid the relatively short command length limit.
