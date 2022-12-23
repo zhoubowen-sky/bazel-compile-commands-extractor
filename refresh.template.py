@@ -1,3 +1,5 @@
+# coding=UTF-8
+
 """
 As a template, this file helps implement the refresh_compile_commands rule and is not part of the user interface. See ImplementationReadme.md for top-level context -- or refresh_compile_commands.bzl for narrower context.
 
